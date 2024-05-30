@@ -3,6 +3,7 @@ import { AddCategoryRequest } from '../models/add-category-request.model';
 import { CategoryService } from '../services/category.service';
 import { Subscription } from 'rxjs';
 
+//define component name
 @Component({
   selector: 'app-add-category',
   templateUrl: './add-category.component.html',
@@ -10,7 +11,9 @@ import { Subscription } from 'rxjs';
 })
 export class AddCategoryComponent implements OnDestroy{
 
+  //create binding variable model
   model:AddCategoryRequest
+  //create subscription variable
   private addCategorySubscription?: Subscription
   constructor(private categoryService:CategoryService){
     this.model={
@@ -19,6 +22,7 @@ export class AddCategoryComponent implements OnDestroy{
     }
   }
 
+  //on submit call function onFormSubmit
   onFormSubmit(){
     // console.log(this.model)
     this.addCategorySubscription = this.categoryService.addCategory(this.model).subscribe({
@@ -28,6 +32,7 @@ export class AddCategoryComponent implements OnDestroy{
     })
   }
   
+  //on component destroy unsubscribe
   ngOnDestroy(): void {
     this.addCategorySubscription?.unsubscribe();
   }
